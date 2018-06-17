@@ -1,0 +1,31 @@
+package pl.oskarpolak.blox.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import pl.oskarpolak.blox.models.UserEntity;
+import pl.oskarpolak.blox.models.forms.RegisterForm;
+import pl.oskarpolak.blox.models.repositories.UserRepository;
+
+@Controller
+public class UserAuthController {
+
+    @Autowired
+    UserRepository userRepository;
+
+    @GetMapping("/register")
+    public String register(Model model) {
+        model.addAttribute("registerForm", new RegisterForm());
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String register(@ModelAttribute RegisterForm registerForm) {
+        //Sprawdzam czy login nie jest juz zajety
+        
+        return "redirect:/login";
+    }
+}

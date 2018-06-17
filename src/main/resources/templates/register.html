@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Rejestracja</title>
+</head>
+<body>
+    <div style="text-align: center;">
+        <h1 th:text="${info}"></h1>
+            <form method="post" action="/register" th:object="${registerForm}">
+                 <input type="text" th:field="*{login}" placeholder="Login">   <br/>
+                 <input type="password" th:field="*{password}" placeholder="Hasło"> <br/>
+                 <input type="submit" value="Zarejestruj">
+            </form>
+    </div>
+</body>
+</html>
