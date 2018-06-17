@@ -22,7 +22,7 @@ public class MainController {
         userEntity.setLogin("oskar");
         userEntity.setPassword("costam");
 
-        userRepository.de(userEntity);
+        //userRepository.de(userEntity);
         return "Stworzono usera!";
     }
 
