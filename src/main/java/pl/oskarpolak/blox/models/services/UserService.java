@@ -6,6 +6,8 @@ import pl.oskarpolak.blox.models.UserEntity;
 import pl.oskarpolak.blox.models.forms.RegisterForm;
 import pl.oskarpolak.blox.models.repositories.UserRepository;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
 
@@ -24,5 +26,14 @@ public class UserService {
 
         userRepository.save(newUser);
         return true;
+    }
+
+
+    public boolean loginUser(String login, String password){
+        Optional<UserEntity> loggedUser =
+                userRepository.findByLoginAndPassword(login, password);
+
+        //tutaj logika uwietrzlnienia
+        return loggedUser.isPresent();
     }
 }

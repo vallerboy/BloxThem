@@ -9,22 +9,7 @@ import pl.oskarpolak.blox.models.UserEntity;
 import pl.oskarpolak.blox.models.repositories.UserRepository;
 
 @Controller
-public class MainController {
-
-    @Autowired
-    UserRepository userRepository;
-
-    @GetMapping("/")
-    @ResponseBody
-    public String index(){
-        UserEntity userEntity = new UserEntity();
-        userEntity.setHasAdmin(true);
-        userEntity.setLogin("oskar");
-        userEntity.setPassword("costam");
-
-        //userRepository.de(userEntity);
-        return "Stworzono usera!";
-    }
+public class MainController{
 
 
 }

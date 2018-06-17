@@ -10,7 +10,5 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends CrudRepository<UserEntity, Integer> {
     boolean existsByLogin(String login);
-
-    //@Query(nativeQuery = true, value = "SELECT * FROM cos HEHE")
-    //Optional<UserEntity> findByLoginAndPassword(String v, String f);
+    Optional<UserEntity> findByLoginAndPassword(String login, String password);
 }

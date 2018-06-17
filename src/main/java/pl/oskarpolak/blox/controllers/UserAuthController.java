@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.oskarpolak.blox.models.UserEntity;
+import pl.oskarpolak.blox.models.forms.LoginForm;
 import pl.oskarpolak.blox.models.forms.RegisterForm;
 import pl.oskarpolak.blox.models.repositories.UserRepository;
 import pl.oskarpolak.blox.models.services.UserService;
@@ -33,5 +34,22 @@ public class UserAuthController {
         }
         userService.registerUser(registerForm);
         return "redirect:/login";
+    }
+
+
+    @GetMapping("/login")
+    public String login(Model model){
+        model.addAttribute("loginForm", new LoginForm());
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String login(@ModelAttribute LoginForm loginForm,
+                        Model model){
+        if(!userService.loginUser(loginForm.getLogin(), loginForm.getPassword())){
+            model.addAttribute("info", "Błędne dane logowania");
+            return "login";
+        }
+        return "redirect:/";
     }
 }
