@@ -18,13 +18,13 @@ public class MainController{
     UserService userService;
 
 
-    @ModelAttribute
-    public void addModel(Model model){
-        model.addAttribute("user", userService);
-    }
-
     @GetMapping("/")
     public String index(Model model){
+        if(userService.getUserData() == null){
+            return "redirect:/login";
+        }
+        
+        model.addAttribute("user", userService);
         model.addAttribute("info", userService.isLogin() ? "Jestes zalogowany" : "Nie jestes");
         return "index";
     }
