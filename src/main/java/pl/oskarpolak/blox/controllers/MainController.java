@@ -23,7 +23,7 @@ public class MainController{
         if(userService.getUserData() == null){
             return "redirect:/login";
         }
-        
+
         model.addAttribute("user", userService);
         model.addAttribute("info", userService.isLogin() ? "Jestes zalogowany" : "Nie jestes");
         return "index";
