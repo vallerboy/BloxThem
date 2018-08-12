@@ -23,7 +23,7 @@ public class MainController{
 
     @GetMapping("/")
     public String index(Model model){
-        if(userService.isLogin()){
+        if(!userService.isLogin()){
             return "redirect:/login";
         }
 
