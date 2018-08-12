@@ -5,7 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.oskarpolak.blox.models.PostEntity;
+import pl.oskarpolak.blox.models.forms.CommentForm;
 import pl.oskarpolak.blox.models.forms.PostForm;
+import pl.oskarpolak.blox.models.services.CommentService;
 import pl.oskarpolak.blox.models.services.PostService;
 import pl.oskarpolak.blox.models.services.UserService;
 
@@ -19,6 +21,9 @@ public class PostController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    CommentService commentService;
 
     @GetMapping("/addpost")
     public String addPost(Model model){
@@ -42,12 +47,23 @@ public class PostController {
         if(postEntity.isPresent()){
             model.addAttribute("post", postEntity.get());
         }
-
+        model.addAttribute("commentForm", new CommentForm());
         return postEntity.isPresent() ? "post" : "redirect:/";
 //        return   postService.getPostById(id).map(s -> {
 //                      model.addAttribute("post", s);
 //                      return "post";
 //        }).orElse("redirect:/");
+    }
+
+    @PostMapping("/comment/{id}")
+    public String addComment(@ModelAttribute CommentForm commentForm,
+                             @PathVariable("id") int postId){
+        if(!userService.isLogin()){
+            return "redirect:/login";
+        }
+
+        commentService.addComment(commentForm, postId);
+        return "redirect:/post/" + postId;
     }
 
 

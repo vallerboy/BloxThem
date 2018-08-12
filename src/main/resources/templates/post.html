@@ -16,6 +16,17 @@
              </p>
 
              <a href="/">Powrót</a>
+
+         <hr/>
+
+         <span th:each="comment : ${post.getComments()}">
+             <p th:text="${comment.getUser().getLogin()} + ': ' + ${comment.getContext()}"></p>
+         </span>
+
+         <form method="post" th:action="'/comment/' + ${post.getId()}" th:object="${commentForm}">
+             <input type="text" th:field="*{context}" placeholder="Treść komentarza">
+             <input type="submit" value="Dodaj"/>
+         </form>
      </div>
 
 </body>
