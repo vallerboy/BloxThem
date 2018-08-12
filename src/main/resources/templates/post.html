@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/2005/Atom">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${post.getTitle()}"></title>
+</head>
+<body>
+     <div style="text-align: center;">
+         <h1 th:text="${post.getTitle()}"></h1>
+         <p th:text="${post.getUser().getLogin()}"></p>
+         <br/><br/>
+
+         <span th:text="${post.getContext()}"></span>
+             <p>
+                 <strong th:text="${post.getCreationTime()}"></strong>
+             </p>
+     </div>
+</body>
+</html>
