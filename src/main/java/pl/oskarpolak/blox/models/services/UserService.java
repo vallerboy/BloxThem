@@ -53,4 +53,9 @@ public class UserService {
     public boolean isLogin() {
         return isLogin;
     }
+
+    public void logout(){
+        isLogin = false;
+        userData = null;
+    }
 }

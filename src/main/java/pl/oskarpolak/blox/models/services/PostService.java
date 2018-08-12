@@ -7,6 +7,8 @@ import pl.oskarpolak.blox.models.PostEntity;
 import pl.oskarpolak.blox.models.forms.PostForm;
 import pl.oskarpolak.blox.models.repositories.PostRepository;
 
+import java.util.Optional;
+
 @Service
 public class PostService {
 
@@ -21,9 +23,17 @@ public class PostService {
 
         postEntity.setTitle(postForm.getTitle());
         postEntity.setContext(postForm.getContext());
-        postEntity.setUserId(userService.getUserData().getId());
+        postEntity.setUser(userService.getUserData());
 
         postRepository.save(postEntity);
+    }
+
+    public Optional<PostEntity> getPostById(int id){
+        return postRepository.findById(id);
+    }
+
+    public Iterable<PostEntity> getAllPosts() {
+        return postRepository.findAllByOrderByIdDesc();
     }
 
 }

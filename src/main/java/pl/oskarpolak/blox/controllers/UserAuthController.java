@@ -52,4 +52,10 @@ public class UserAuthController {
         }
         return "redirect:/";
     }
+
+    @GetMapping("/logout")
+    public String logout(){
+        userService.logout();
+        return "redirect:/login";
+    }
 }

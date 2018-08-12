@@ -6,5 +6,15 @@
 </head>
 <body>
     <h1 th:text="${user.getUserData().getLogin()} + ', ' + ${info}"></h1>
+    <br/>
+    <a href="/logout">Wyloguj się</a>
+
+    <div style="text-align: center;">
+        <div th:each="post : ${posts}">
+            <h2 th:text="${post.title}"></h2>
+            <h3 th:text="${post.context}" style="width: 100px;   white-space: nowrap; text-align: center; overflow: hidden; text-overflow: ellipsis;"></h3>
+            <hr/> <br/>
+        </div>
+    </div>
 </body>
 </html>

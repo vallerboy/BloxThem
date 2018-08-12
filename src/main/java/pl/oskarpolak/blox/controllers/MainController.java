@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pl.oskarpolak.blox.models.UserEntity;
 import pl.oskarpolak.blox.models.repositories.UserRepository;
+import pl.oskarpolak.blox.models.services.PostService;
 import pl.oskarpolak.blox.models.services.UserService;
 
 @Controller
@@ -17,6 +18,8 @@ public class MainController{
     @Autowired
     UserService userService;
 
+    @Autowired
+    PostService postService;
 
     @GetMapping("/")
     public String index(Model model){
@@ -24,6 +27,7 @@ public class MainController{
             return "redirect:/login";
         }
 
+        model.addAttribute("posts", postService.getAllPosts());
         model.addAttribute("user", userService);
         model.addAttribute("info", userService.isLogin() ? "Jestes zalogowany" : "Nie jestes");
         return "index";
