@@ -3,6 +3,7 @@ package pl.oskarpolak.blox.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.oskarpolak.blox.models.PostEntity;
 import pl.oskarpolak.blox.models.forms.CommentForm;
@@ -11,6 +12,7 @@ import pl.oskarpolak.blox.models.services.CommentService;
 import pl.oskarpolak.blox.models.services.PostService;
 import pl.oskarpolak.blox.models.services.UserService;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -56,13 +58,15 @@ public class PostController {
     }
 
     @PostMapping("/comment/{id}")
-    public String addComment(@ModelAttribute CommentForm commentForm,
+    public String addComment(@ModelAttribute @Valid CommentForm commentForm,
+                             BindingResult bindingResult,
                              @PathVariable("id") int postId){
         if(!userService.isLogin()){
             return "redirect:/login";
         }
-
-        commentService.addComment(commentForm, postId);
+        if(!bindingResult.hasErrors()) {
+            commentService.addComment(commentForm, postId);
+        }
         return "redirect:/post/" + postId;
     }
 
