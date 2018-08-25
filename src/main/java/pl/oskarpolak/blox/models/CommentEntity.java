@@ -1,5 +1,6 @@
 package pl.oskarpolak.blox.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,7 +20,8 @@ public class CommentEntity {
 
     @ManyToOne
     @JoinColumn(name = "post_id")
-    private PostEntity post;
+    @JsonIgnore
+    private  PostEntity post;
 
     @Column(name = "creation_time")
     private LocalDateTime creationTime;

@@ -1,5 +1,6 @@
 package pl.oskarpolak.blox.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,5 +19,6 @@ public class UserEntity {
     private boolean hasAdmin;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @JsonIgnore
     List<PostEntity> posts;
 }
