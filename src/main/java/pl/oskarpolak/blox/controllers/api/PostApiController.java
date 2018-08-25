@@ -3,10 +3,7 @@ package pl.oskarpolak.blox.controllers.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.oskarpolak.blox.models.PostEntity;
 import pl.oskarpolak.blox.models.services.PostService;
 
@@ -24,7 +21,7 @@ public class PostApiController {
        return ResponseEntity.ok(postService.getAllPosts());
     }
 
-    @GetMapping(value = "/post/{id}")
+    @GetMapping(value = "/post/{id}", produces = "application/json")
     public ResponseEntity getOnePost(@PathVariable("id") int id){
         Optional<PostEntity> postEntity = postService.getPostById(id);
 //        if(postEntity.isPresent()){
@@ -33,5 +30,11 @@ public class PostApiController {
 //        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     //==
         return postEntity.map(s -> ResponseEntity.ok(s)).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+    @PostMapping(value = "/post", consumes = "application/json")
+    public ResponseEntity createOnePost(@RequestBody PostEntity post){
+        postService.addPost(post);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

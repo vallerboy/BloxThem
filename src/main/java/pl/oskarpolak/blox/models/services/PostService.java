@@ -28,6 +28,10 @@ public class PostService {
         postRepository.save(postEntity);
     }
 
+    public void addPost(PostEntity postEntity){
+        postRepository.save(postEntity);
+    }
+
     public Optional<PostEntity> getPostById(int id){
         return postRepository.findById(id);
     }
