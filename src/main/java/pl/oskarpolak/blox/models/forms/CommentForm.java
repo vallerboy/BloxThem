@@ -7,6 +7,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Data
 public class CommentForm {
-    @NotEmpty //@Size, @Length, @NotNull, @Email, @Pattern(regexp = "jakis regex")
+    @NotEmpty //@Size, @Length, @NotNull, @Email, @Pattern(regexp = "jakis regex"), @Regon
+    //@NIP, @Pesel
     private String context;
 }

@@ -40,4 +40,8 @@ public class PostService {
         return postRepository.findAllByOrderByIdDesc();
     }
 
+    public void deletePostById(int id){
+        postRepository.deleteById(id);
+    }
+
 }

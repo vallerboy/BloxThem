@@ -37,4 +37,10 @@ public class PostApiController {
         postService.addPost(post);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
+    @DeleteMapping(value = "/post/{id}" )
+    public ResponseEntity deleteOnePost(@PathVariable("id") int id){
+        postService.deletePostById(id);
+        return ResponseEntity.ok().build();
+    }
 }

@@ -1,6 +1,8 @@
 package pl.oskarpolak.blox.models;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.EAN;
+import org.hibernate.validator.constraints.pl.PESEL;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -15,6 +17,7 @@ public class PostEntity {
     private int id;
     private String title;
     private String context;
+
 
 
     @JoinColumn(name = "user_id")
