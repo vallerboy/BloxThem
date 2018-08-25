@@ -8,6 +8,7 @@ import pl.oskarpolak.blox.models.CommentEntity;
 @Repository
 public interface CommentRepository extends CrudRepository<CommentEntity, Integer> {
 
+    //to jest native query
     @Query(name = "UPDATE comment SET cos = ?1", nativeQuery = true)
     void udapteCosTam(String cos);
 }
